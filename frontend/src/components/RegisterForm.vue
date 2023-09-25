@@ -1,7 +1,7 @@
 <template>
     <div class="form-container">
       <h1>Formulario de Registro</h1>
-      <form @submit.prevent="registrar" class="form">
+      <form @submit.prevent="sendForm" class="form">
         <label for="nombre">Nombre</label>
         <input type="text" id="nombre" v-model="usuario.nombre" required>
         
@@ -28,10 +28,26 @@
       };
     },
     methods: {
-      registrar() {
-        console.log("Datos del usuario:", this.usuario);
+    async sendForm() {
+      try {
+        const respuesta = await fetch('/usuario', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(this.usuario)
+        });
+
+        if (respuesta.ok) {
+          console.log('Usuario registrado');
+        } else {
+          console.error('Error en el registro');
+        }
+      } catch (error) {
+        console.error('Error en la solicitud:', error);
       }
     }
+  }
   };
   </script>
    
@@ -39,6 +55,8 @@
     .form-container{
       display: flex;
       flex-direction: column;
+      max-width: 100%;
+      max-height: 100vh;
     }
     .form {
       display: flex;
