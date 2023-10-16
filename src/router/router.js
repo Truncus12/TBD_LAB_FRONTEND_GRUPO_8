@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 import HomeView from '../views/HomeView.vue';
 import MainVolunteerView from '../views/MainVolunteerView.vue';
+import MainOrganizerView from '../views/MainOrganizerView.vue';
 
 const routes = [
     {
@@ -14,6 +15,11 @@ const routes = [
         name: 'MainVolunteerView',
         component: MainVolunteerView,
     },
+    {
+        path: '/organizador',
+        name: 'MainOrganizerView',
+        component: MainOrganizerView,
+    }
 ];
 
 const router = createRouter({
