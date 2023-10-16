@@ -47,6 +47,13 @@ export default {
             tareas: []
         }
     },
+    mounted: async () => {
+        let respuesta = await fetch("/api/tarea/por-usuario");
+
+        if(respuesta.ok){
+            this.tareas = await respuesta.json();
+        }
+    },
     methods: {
         async completarTarea(id_tarea){
             let respuesta = await fetch("/api/tarea/" + id_tarea + "/completar", {
