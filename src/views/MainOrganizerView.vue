@@ -72,14 +72,18 @@ export default {
     },
     methods: {
         async obtenerActividades(){
-            let respuesta = await fetch("/api/actividad");
+            let respuesta = await fetch(process.env.VUE_APP_URL_SERVER + "/api/actividad", {
+                credentials: "include"
+            });
 
             if(respuesta.ok){
                 this.actividades = await respuesta.json();
             }
         },
         async obtenerUsoUsuarios(){
-            let respuesta = await fetch("/api/usuario/ranking-uso");
+            let respuesta = await fetch(process.env.VUE_APP_URL_SERVER + "/api/usuario/ranking-uso", {
+                credentials: "include"
+            });
 
             if(respuesta.ok){
                 this.uso_usuarios = await respuesta.json();

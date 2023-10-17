@@ -42,13 +42,15 @@
 
 <script>
 export default {
-    data: () => {
+    data(){
         return {
             tareas: []
         }
     },
-    mounted: async () => {
-        let respuesta = await fetch("/api/tarea/por-usuario");
+    async mounted(){
+        let respuesta = await fetch(process.env.VUE_APP_URL_SERVER + "/api/tarea/por-usuario", {
+            credentials: "include"
+        });
 
         if(respuesta.ok){
             this.tareas = await respuesta.json();
@@ -56,8 +58,9 @@ export default {
     },
     methods: {
         async completarTarea(id_tarea){
-            let respuesta = await fetch("/api/tarea/" + id_tarea + "/completar", {
-                method: "POST"
+            let respuesta = await fetch(process.env.VUE_APP_URL_SERVER + "/api/tarea/" + id_tarea + "/completar", {
+                method: "POST",
+                credentials: "include"
             });
 
             if(respuesta.ok){
@@ -65,8 +68,9 @@ export default {
             }
         },
         async eliminarTarea(id_tarea){
-            let respuesta = await fetch("/api/tarea/" + id_tarea, {
-                method: "DELETE"
+            let respuesta = await fetch(process.env.VUE_APP_URL_SERVER + "/api/tarea/" + id_tarea, {
+                method: "DELETE",
+                credentials: "include"
             });
 
             if(respuesta.ok){
