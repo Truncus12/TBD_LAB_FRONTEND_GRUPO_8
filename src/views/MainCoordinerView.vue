@@ -8,24 +8,20 @@
         </nav>
 
 
-        <h4>Actividades</h4>
+        <h4>Emergencias</h4>
         <table>
             <thead>
                 <tr>
                     <th>Nombre</th>
                     <th>Descripción</th>
-                    <th>Emergencia<br>Asociada</th>
-                    <th>Ubicación</th>
                     <th>Estado</th>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="actividad in actividades" v-bind:key="actividad.id">
-                    <td>{{ actividad.nombre }}</td>
-                    <td>{{ actividad.descripcion }}</td>
-                    <td>{{ actividad.emergencia_asociada }}</td>
-                    <td>{{ actividad.ubicacion }}</td>
-                    <td>{{ actividad.estado }}</td>
+                <tr v-for="emergencia in emergencias" v-bind:key="emergencia.id">
+                    <td>{{ emergencia.nombre }}</td>
+                    <td>{{ emergencia.descripcion }}</td>
+                    <td>{{ emergencia.estado }}</td>
                 </tr>
             </tbody>
         </table>
@@ -59,25 +55,25 @@
 export default {
     data(){
         return {
-            actividades: [],
+            emergencias: [],
             uso_usuarios: []
         }
     },
     async mounted(){
         // Carga las actividades y el uso de usuarios en paralelo
         await Promise.all([
-            this.obtenerActividades(),
+            this.obtenerEmergencias(),
             this.obtenerUsoUsuarios()
         ]);
     },
     methods: {
-        async obtenerActividades(){
-            let respuesta = await fetch(process.env.VUE_APP_URL_SERVER + "/api/actividad", {
+        async obtenerEmergencias(){
+            let respuesta = await fetch(process.env.VUE_APP_URL_SERVER + "/api/emergencia", {
                 credentials: "include"
             });
 
             if(respuesta.ok){
-                this.actividades = await respuesta.json();
+                this.emergencias = await respuesta.json();
             }
         },
         async obtenerUsoUsuarios(){

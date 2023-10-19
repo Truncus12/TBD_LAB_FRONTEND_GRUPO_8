@@ -2,7 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 import LoginVolunteerView from '../views/LoginVolunteerView.vue';
 import MainVolunteerView from '../views/MainVolunteerView.vue';
-import MainOrganizerView from '../views/MainOrganizerView.vue';
+import MainCoordinerView from '../views/MainCoordinerView.vue';
+import EmergencyCreateView from '../views/EmergencyCreateView.vue';
 
 const routes = [
     {
@@ -16,9 +17,14 @@ const routes = [
         component: MainVolunteerView,
     },
     {
-        path: '/organizador',
-        name: 'MainOrganizerView',
-        component: MainOrganizerView,
+        path: '/coordinador',
+        name: 'MainCoordinerView',
+        component: MainCoordinerView,
+    },
+    {
+        path: '/coordinador/crear-emergencia',
+        name: 'EmergencyCreateView',
+        component: EmergencyCreateView,
     }
 ];
 
