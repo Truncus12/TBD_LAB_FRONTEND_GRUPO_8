@@ -31,13 +31,14 @@ export default {
     },
     methods: {
         async registrarse() {
-            const respuesta = await fetch(process.env.VUE_APP_URL_SERVER + "/api/auth", {
+            const respuesta = await fetch(process.env.VUE_APP_URL_SERVER + "/api/voluntario/registrar", {
                 method: "POST",
                 credentials: "include",
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
+                    nombre: this.nombre,
                     correo: this.correo,
                     contrasena: this.contrasena
                 })
@@ -47,7 +48,7 @@ export default {
                 this.$router.push("/voluntario");
             } 
             else{
-                alert("¡Credenciales no coinciden!");
+                alert("No se pudo generar el usuario");
             }
         }
     }

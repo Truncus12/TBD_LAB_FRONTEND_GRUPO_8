@@ -27,11 +27,11 @@
                     <td>{{ tarea.ubicacion }}</td>
                     <td>{{ tarea.estado }}</td>
                     <td>
-                        <button @click="completarTarea(tarea.id)">
-                            Completar
+                        <button @click="terminarTarea(tarea.id)">
+                            Terminar
                         </button>
-                        <button @click="eliminarTarea(tarea.id)">
-                            Eliminar
+                        <button @click="cancelarTarea(tarea.id)">
+                            Cancelar
                         </button>
                     </td>
                 </tr>
@@ -48,7 +48,7 @@ export default {
         }
     },
     async mounted(){
-        let respuesta = await fetch(process.env.VUE_APP_URL_SERVER + "/api/tarea/por-usuario", {
+        let respuesta = await fetch(process.env.VUE_APP_URL_SERVER + "/api/tarea", {
             credentials: "include"
         });
 
@@ -57,24 +57,24 @@ export default {
         }
     },
     methods: {
-        async completarTarea(id_tarea){
-            let respuesta = await fetch(process.env.VUE_APP_URL_SERVER + "/api/tarea/" + id_tarea + "/completar", {
+        async terminarTarea(id_tarea){
+            let respuesta = await fetch(process.env.VUE_APP_URL_SERVER + "/api/tarea/" + id_tarea + "/terminar", {
                 method: "POST",
                 credentials: "include"
             });
 
             if(respuesta.ok){
-                alert("¡Tarea completada!");
+                alert("¡Tarea terminada!");
             }
         },
-        async eliminarTarea(id_tarea){
-            let respuesta = await fetch(process.env.VUE_APP_URL_SERVER + "/api/tarea/" + id_tarea, {
-                method: "DELETE",
+        async cancelarTarea(id_tarea){
+            let respuesta = await fetch(process.env.VUE_APP_URL_SERVER + "/api/tarea/" + id_tarea + "/cancelar", {
+                method: "POST",
                 credentials: "include"
             });
 
             if(respuesta.ok){
-                alert("!Tarea borrada!");
+                alert("!Tarea cancelada!");
             }
         }
     }
