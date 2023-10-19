@@ -1,14 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
-import HomeView from '../views/HomeView.vue';
+import LoginVolunteerView from '../views/LoginVolunteerView.vue';
 import MainVolunteerView from '../views/MainVolunteerView.vue';
 import MainOrganizerView from '../views/MainOrganizerView.vue';
 
 const routes = [
     {
-        path: '',
-        name: 'HomeView',
-        component: HomeView,
+        path: '/',
+        name: 'LoginVolunteerView',
+        component: LoginVolunteerView,
     },
     {
         path: '/voluntario',
