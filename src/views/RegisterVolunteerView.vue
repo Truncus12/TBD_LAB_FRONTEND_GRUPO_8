@@ -14,7 +14,10 @@
                 <span>Contraseña</span>
                 <input type="password" v-model="contrasena" required>
             </label>
-
+            <label>
+              <span>repetir Contraseña</span>
+              <input type="password" v-model="confirmar" required>
+            </label>
             <button type="submit">Registrarse</button>
         </form>
     </main>
@@ -26,7 +29,8 @@ export default {
         return {
             nombre: null,
             correo: null,
-            contrasena: null
+            contrasena: null,
+            confirmar: null
         };
     },
     methods: {
@@ -40,11 +44,12 @@ export default {
                 body: JSON.stringify({
                     nombre: this.nombre,
                     correo: this.correo,
-                    contrasena: this.contrasena
+                    contrasena: this.contrasena,
+                    confirmar: this.confirmar
                 })
             });
 
-            if(respuesta.ok){
+            if(respuesta.ok && this.confirmar==this.contrasena){
                 this.$router.push("/voluntario");
             } 
             else{
