@@ -1,7 +1,7 @@
 <template>
     <main>
-        <h1>Registrarse como voluntario</h1>
         <form @submit.prevent="registrarse">
+            <h2>Registrarse como voluntario</h2>
             <label>
                 <span>Nombre</span>
                 <input type="text" v-model="nombre" required>
@@ -54,3 +54,5 @@ export default {
     }
 }
 </script>
+
+<style src="../assets/css/formulario.css"></style>
