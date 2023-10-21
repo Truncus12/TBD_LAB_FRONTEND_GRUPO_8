@@ -1,7 +1,11 @@
 <template>
     <main>
-        <h1>Inicio de sesión para voluntario</h1>
+        <h1>VoluntaNet</h1>
+        <h3>Ayudando tarea a tarea</h3>
+
         <form @submit.prevent="iniciarSesion">
+            <h2>Iniciar sesión</h2>
+
             <label>
                 <span>Correo</span>
                 <input type="email" placeholder="example@mail.com" v-model="correo" required>
@@ -12,6 +16,7 @@
             </label>
 
             <button type="submit">Iniciar sesión</button>
+            <a href="/registrarse">¿No tienes cuenta? ¡Registrate!</a>
         </form>
     </main>
 </template>
@@ -48,3 +53,5 @@ export default {
     }
 }
 </script>
+
+<style src="../assets/css/formulario.css"></style>

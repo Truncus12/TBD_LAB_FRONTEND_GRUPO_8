@@ -80,3 +80,5 @@ export default {
     }
 }
 </script>
+
+<style src="../assets/css/tabla.css"></style>
