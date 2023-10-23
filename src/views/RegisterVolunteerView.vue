@@ -35,6 +35,11 @@ export default {
     },
     methods: {
         async registrarse() {
+            if(this.confirmar == this.contrasena){
+                alert("Las credenciales no coinciden");
+                return;
+            }
+
             const respuesta = await fetch(process.env.VUE_APP_URL_SERVER + "/api/voluntario/registrar", {
                 method: "POST",
                 credentials: "include",
@@ -49,8 +54,8 @@ export default {
                 })
             });
 
-            if(respuesta.ok && this.confirmar==this.contrasena){
-                this.$router.push("/voluntario");
+            if(respuesta.ok){
+                this.$router.push("/");
             } 
             else{
                 alert("No se pudo generar el usuario");
