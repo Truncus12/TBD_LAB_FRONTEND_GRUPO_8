@@ -37,11 +37,18 @@
                 </tr>
             </tbody>
         </table>
+        
+        <MapComponent />
     </main>
 </template>
 
 <script>
+import MapComponent from '../components/MapComponent.vue';
+
 export default {
+    components: {
+        MapComponent
+    },
     data(){
         return {
             tareas: []
