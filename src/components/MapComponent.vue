@@ -7,7 +7,7 @@
                     <span>
                         Maximo de tareas:
                     </span>
-                    <input type="number">
+                    <input type="number" class="limite" @change="cargarTareas()">
                 </label>
             </div>
             <div class="cont-tareas">
@@ -45,16 +45,24 @@ export default {
         };
     },
     async mounted(){
-        const respuesta = await fetch(process.env.VUE_APP_URL_SERVER + "/api/tarea/por-cercania?limite=25", {
-            method: "GET",
-            credentials: "include"
-        });
-
-        if(respuesta.ok){
-            this.datos_tareas = await respuesta.json();
-        }
+        await this.cargarTareas();
     },
     methods: {
+        async cargarTareas(){
+            let limite_tareas = parseInt(document.querySelector("input.limite").value);
+            if(isNaN(limite_tareas)){
+                limite_tareas = 0;
+            }
+
+            const respuesta = await fetch(process.env.VUE_APP_URL_SERVER + "/api/tarea/por-cercania?limite=" + limite_tareas, {
+                method: "GET",
+                credentials: "include"
+            });
+
+            if(respuesta.ok){
+                this.datos_tareas = await respuesta.json();
+            }
+        },
         entrarTarea(indice){
             let punto = document.querySelectorAll(".punto-tarea")[indice];
             punto.classList.add("hovered");
