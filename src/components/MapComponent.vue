@@ -11,30 +11,23 @@
                 </label>
             </div>
             <div class="cont-tareas">
-                <WorkComponent />
-                <WorkComponent />
-                <WorkComponent />
-                <WorkComponent />
+                <WorkComponent v-for="(tarea, i) in datos_tareas" v-bind:key="tarea.id" v-bind:tarea="tarea"
+                    @mouseover="entrarTarea(i)"
+                    @mouseout="salirTarea(i)" />
             </div>
         </div>
         <div class="mapa">
             <svg class="dibujo">
-                <circle cx="50%" cy="50%" r="25"></circle>
-                <circle cx="70%" cy="34%" r="25"></circle>
-                <circle cx="64%" cy="76%" r="25"></circle>
-                <circle cx="12%" cy="30%" r="25"></circle>
+                <circle class="usuario" cx="50%" cy="50%" r="15" />
+                <circle v-for="(tarea, i) in datos_tareas" v-bind:key="tarea.id" 
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="punto-tarea"
+                    v-bind:cx="((tarea.latitud + 33.55) * 1000 + 50) + '%'"
+                    v-bind:cy="((tarea.longitud + 70.55) * 1000 + 50) + '%'"
+                    @mouseover="entrarPunto(i)"
+                    @mouseout="salirPunto(i)"
+                    r="18" />
             </svg>
-            <!--
-            <div class="panel">
-                <span>Parámetros</span>
-                <label>
-                    <span>
-                        Maximo de tareas:
-                    </span>
-                    <input type="number">
-                </label>
-            </div>
-            -->
         </div>
     </div>
 </template>
@@ -46,24 +39,37 @@ export default {
     components: {
         WorkComponent
     },
-    mounted(){
-        //let svg = document.querySelector("svg");
-        let tareas = document.querySelectorAll(".tarea");
-        let puntos = document.querySelectorAll("circle");
+    data(){
+        return {
+            datos_tareas: []
+        };
+    },
+    async mounted(){
+        const respuesta = await fetch(process.env.VUE_APP_URL_SERVER + "/api/tarea/por-cercania?limite=25", {
+            method: "GET",
+            credentials: "include"
+        });
 
-        for(let i=0; i<tareas.length; i++){
-            tareas[i].onmouseover = () => {
-                puntos[i].classList.add("hovered");
-            }
-            tareas[i].onmouseout = () => {
-                puntos[i].classList.remove("hovered");
-            }
-            puntos[i].onmouseover = () => {
-                tareas[i].classList.add("hovered");
-            }
-            puntos[i].onmouseout = () => {
-                tareas[i].classList.remove("hovered");
-            }
+        if(respuesta.ok){
+            this.datos_tareas = await respuesta.json();
+        }
+    },
+    methods: {
+        entrarTarea(indice){
+            let punto = document.querySelectorAll(".punto-tarea")[indice];
+            punto.classList.add("hovered");
+        },
+        salirTarea(indice){
+            let punto = document.querySelectorAll(".punto-tarea")[indice];
+            punto.classList.remove("hovered");
+        },
+        entrarPunto(indice){
+            let tarea = document.querySelectorAll(".tarea")[indice];
+            tarea.classList.add("hovered");
+        },
+        salirPunto(indice){
+            let tarea = document.querySelectorAll(".tarea")[indice];
+            tarea.classList.remove("hovered");
         }
     }
 };
@@ -96,6 +102,19 @@ export default {
 .lista .panel{
     border-bottom: 2px solid black;
 }
+.panel > span{
+    text-align: center;
+    font-weight: bold;
+    display: block;
+}
+.panel input{
+    margin-left: 1em;
+}
+
+.lista .cont-tareas{
+    max-height: 85%;
+    overflow-y: scroll;
+}
 
 .mapa{
     position: relative;
@@ -112,41 +131,24 @@ svg{
     height: 100%;
 }
 
-.mapa .panel{
-    position: absolute;
-    top: 2em;
-    left: 2em;
-
-    padding: 0.5em;
-    border: 2px solid black;
-    background: white;
-}
-.panel > span{
-    text-align: center;
-    font-weight: bold;
-    display: block;
-}
-.panel input{
-    margin-left: 1em;
+circle.usuario{
+    fill: white;
+    stroke: black;
+    stroke-width: 2px;
 }
 
-circle{
+.punto-tarea{
     fill: var(--color-principal);
     transform-origin: center;
     transform-box: fill-box;
     transition: scale 0.5s;
 }
-circle:hover{
-    scale: 2;
+.punto-tarea:hover{
+    scale: 1.5;
     cursor: pointer;
 }
-circle.hovered{
-    scale: 2;
-}
-
-line{
-    stroke: black;
-    stroke-width: 2px;
+.punto-tarea.hovered{
+    scale: 1.5;
 }
 
 </style>

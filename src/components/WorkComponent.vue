@@ -1,18 +1,25 @@
 <template>
     <div class="tarea">
         <div class="titulo">
-            Tarea Lorem Ipsum
+            {{ tarea.nombre }}
         </div>
         <div class="descripcion">
             <span class="fecha">Fecha: <span>15-11-2023</span></span>
             <br>
-            Esta tarea requiere...
+            {{ tarea.descripcion }}
         </div>
     </div>
 </template>
 
 <script>
-export default {};
+export default {
+    props: {
+        tarea: {
+            nombre: "",
+            descripcion: ""
+        }
+    }
+};
 </script>
 
 <style>
