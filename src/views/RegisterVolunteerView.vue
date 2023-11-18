@@ -35,7 +35,7 @@ export default {
     },
     methods: {
         async registrarse() {
-            if(this.confirmar == this.contrasena){
+            if(this.confirmar != this.contrasena){
                 alert("Las credenciales no coinciden");
                 return;
             }
