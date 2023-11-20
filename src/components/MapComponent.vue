@@ -22,8 +22,8 @@
                 <circle v-for="(tarea, i) in datos_tareas" v-bind:key="tarea.id" 
                     xmlns="http://www.w3.org/2000/svg"
                     class="punto-tarea"
-                    v-bind:cy="(tarea.latitud * -1) + '%'"
-                    v-bind:cx="(tarea.longitud * -1) + '%'"
+                    v-bind:cx="(((tarea.longitud - ubicacion.longitud) / 0.01 + 0.5) * 100) + '%'"
+                    v-bind:cy="(((tarea.latitud - ubicacion.latitud) / 0.01 + 0.5) * 100) + '%'"
                     @mouseover="entrarPunto(i)"
                     @mouseout="salirPunto(i)"
                     r="18" />
@@ -41,6 +41,7 @@ export default {
     },
     data(){
         return {
+            ubicacion: {},
             datos_tareas: []
         };
     },
@@ -60,7 +61,10 @@ export default {
             });
 
             if(respuesta.ok){
-                this.datos_tareas = await respuesta.json();
+                let datos_resp = await respuesta.json();
+
+                this.ubicacion = datos_resp["ubicacion"];
+                this.datos_tareas = datos_resp["tareas"];
             }
         },
         entrarTarea(indice){
