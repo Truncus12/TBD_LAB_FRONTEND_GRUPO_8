@@ -1,9 +1,9 @@
 <template>
     <main>
         <nav>
-            <a href="/cerrar-sesion">
-                Cerrar sesión
-            </a>
+          <button class="custom-button" onclick="window.location.href='/cerrar-sesion'">
+            Cerrar sesión
+          </button>
         </nav>
 
 
@@ -37,7 +37,8 @@
                 </tr>
             </tbody>
         </table>
-        
+      <br><hr width="1000"><br>
+      <h4>Mapa tareas cercanas</h4>
         <MapComponent />
     </main>
 </template>
