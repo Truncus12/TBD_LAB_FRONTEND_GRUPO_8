@@ -22,8 +22,8 @@
                 <circle v-for="(tarea, i) in datos_tareas" v-bind:key="tarea.id" 
                     xmlns="http://www.w3.org/2000/svg"
                     class="punto-tarea"
-                    v-bind:cx="(((tarea.longitud - ubicacion.longitud) / 0.01 + 0.5) * 100) + '%'"
-                    v-bind:cy="(((tarea.latitud - ubicacion.latitud) / 0.01 + 0.5) * 100) + '%'"
+                    v-bind:cx="(((tarea.longitud - ubicacion.longitud) / 0.06 + 0.5) * 100) + '%'"
+                    v-bind:cy="(((-tarea.latitud + ubicacion.latitud) / 0.06 + 0.5) * 100) + '%'"
                     @mouseover="entrarPunto(i)"
                     @mouseout="salirPunto(i)"
                     r="18" />
