@@ -2,7 +2,7 @@
     <main>
         <h1>VoluntaNet</h1>
         <h3>Ayudando tarea a tarea</h3>
-      <form @submit.prevent="iniciarSesion">
+        <form @submit.prevent="iniciarSesion">
             <h2>Iniciar sesión</h2>
 
             <label>
@@ -42,10 +42,10 @@ export default {
                 })
             });
 
-            if(respuesta.ok){
+            if (respuesta.ok) {
                 this.$router.push("/voluntario");
-            } 
-            else{
+            }
+            else {
                 alert("¡Credenciales no coinciden!");
             }
         }

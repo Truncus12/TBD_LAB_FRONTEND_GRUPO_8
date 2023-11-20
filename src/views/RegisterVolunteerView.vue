@@ -15,7 +15,7 @@
                 <input type="password" v-model="contrasena" required>
             </label>
             <label>
-              <span>repetir Contraseña</span>
+              <span>Repetir Contraseña</span>
               <input type="password" v-model="confirmar" required>
             </label>
             <button type="submit">Registrarse</button>
