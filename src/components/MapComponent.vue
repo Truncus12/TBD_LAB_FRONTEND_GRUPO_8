@@ -46,9 +46,29 @@ export default {
         };
     },
     async mounted(){
+        await this.actualizarUbicacion();
         await this.cargarTareas();
     },
     methods: {
+        async actualizarUbicacion(){
+            let geo = await this.obtenerGeolocalizacion();
+
+            await fetch(process.env.VUE_APP_URL_SERVER + "/api/voluntario/ubicacion", {
+                method: "PUT",
+                credentials: "include",
+                body: JSON.stringify({
+                    "longitud": geo.coords.longitude,
+                    "latitud": geo.coords.latitude
+                })
+            });
+        },
+
+        async obtenerGeolocalizacion(){
+            return new Promise((res, err) => {
+                navigator.geolocation.getCurrentPosition(res, err);
+            })
+        },
+
         async cargarTareas(){
             let limite_tareas = parseInt(document.querySelector("input.limite").value);
             if(isNaN(limite_tareas)){
