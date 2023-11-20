@@ -1,6 +1,6 @@
-# frontend
+# Frontend
 
-## 1 - instalar proyecto
+## 1 - Instalar dependecias del proyecto
 ```
 npm install
 ```
