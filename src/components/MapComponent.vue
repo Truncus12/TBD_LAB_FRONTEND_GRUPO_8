@@ -55,6 +55,9 @@ export default {
 
             await fetch(process.env.VUE_APP_URL_SERVER + "/api/voluntario/ubicacion", {
                 method: "PUT",
+                headers: {
+                  'Content-Type': 'application/json'
+                },
                 credentials: "include",
                 body: JSON.stringify({
                     "longitud": geo.coords.longitude,
