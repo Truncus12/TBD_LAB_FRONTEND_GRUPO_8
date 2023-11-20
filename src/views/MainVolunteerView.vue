@@ -26,7 +26,7 @@
                     <td>{{ tarea.emergencia_asociada }}</td>
                     <td>{{ tarea.ubicacion }}</td>
                     <td>{{ tarea.estado }}</td>
-                    <td>
+                    <td class="contenedor-botones">
                         <button @click="terminarTarea(tarea.id)">
                             Terminar
                         </button>
